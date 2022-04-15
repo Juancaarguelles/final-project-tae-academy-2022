@@ -1,4 +1,4 @@
-package com.university;
+package com.university.ui;
 
 public class Main {
 

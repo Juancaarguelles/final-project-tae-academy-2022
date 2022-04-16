@@ -1,6 +1,6 @@
 package com.university.model;
 
-public abstract class Person
+public class Person
 {
     private static int ITERATOR;
     protected int id;

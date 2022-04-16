@@ -2,11 +2,12 @@ package com.university.model;
 
 import com.university.exceptions.CouldNotCreateException;
 import com.university.exceptions.CouldNotDeleteException;
+import com.university.interfaces.IStudent;
 import com.university.model.teacher.Teacher;
 
 import java.util.List;
 
-public class Lesson
+public class Lesson implements IStudent
 {
     private String name;
     private String classroom;
@@ -51,6 +52,7 @@ public class Lesson
         this.teacher = teacher;
     }
 
+    @Override
     public boolean addStudent(Student student) throws CouldNotCreateException
     {
         if(student != null)
@@ -61,6 +63,7 @@ public class Lesson
         throw new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
     }
 
+    @Override
     public boolean deleteStudent(int index) throws CouldNotDeleteException
     {
         if(index < 0 || index >= this.students.size())
@@ -70,9 +73,8 @@ public class Lesson
         return true;
     }
 
-    public String listAll()
-    {
-
+    @Override
+    public String listAllStudents() {
         StringBuilder str = new StringBuilder();
 
         if(this.students.size()>0) {
@@ -85,12 +87,23 @@ public class Lesson
         return str.toString();
     }
 
+    public boolean findStudent(int id)
+    {
+        for(Student current : this.students)
+        {
+            if(current.id == id)
+                return true;
+        }
+        return false;
+    }
+
+
     @Override
     public String toString()
     {
         return "NAME : "+this.name+
                 "\nCLASSROOM : "+this.classroom+
-                "\nSTUDENTS : "+listAll()+
+                "\nSTUDENTS : "+listAllStudents()+
                 "\nTEACHER : "+this.teacher+"\n";
 
     }

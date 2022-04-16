@@ -6,7 +6,7 @@ import com.university.model.Lesson;
 
 public interface ILesson
 {
-    boolean add(Lesson lesson) throws CouldNotCreateException;
-    boolean delete(int index) throws CouldNotDeleteException;
-    String listAll();
+    boolean addLesson(Lesson lesson) throws CouldNotCreateException;
+    boolean deleteLesson(int index) throws CouldNotDeleteException;
+    String listAllLessons();
 }

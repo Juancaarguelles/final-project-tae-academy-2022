@@ -2,12 +2,15 @@ package com.university.model;
 
 import com.university.exceptions.CouldNotCreateException;
 import com.university.exceptions.CouldNotDeleteException;
+import com.university.interfaces.ILesson;
+import com.university.interfaces.IStudent;
+import com.university.interfaces.ITeacher;
 import com.university.model.teacher.Teacher;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class University
+public class University implements ILesson, IStudent, ITeacher
 {
     private List<Lesson>classes;
     private List<Student>students;
@@ -20,8 +23,45 @@ public class University
         this.teachers = new ArrayList<>();
     }
 
-    public boolean addClass(Lesson lesson) throws CouldNotCreateException
+
+    @Override
+    public boolean addStudent(Student student) throws CouldNotCreateException
     {
+        if(student != null)
+        {
+            this.students.add(student);
+            return true;
+        }
+        throw new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
+    }
+
+    @Override
+    public boolean deleteStudent(int index) throws CouldNotDeleteException
+    {
+        if(index < 0 || index >= this.students.size())
+            throw new CouldNotDeleteException(CouldNotDeleteException.NOT_DELETED_MSG);
+
+        this.students.remove(index);
+        return true;
+    }
+
+    @Override
+    public String listAllStudents() {
+        StringBuilder str = new StringBuilder();
+
+        if(this.students.size()>0) {
+            for (Student current : this.students)
+                str.append(current).append("\n");
+        }
+        else
+            str.append("THERE IS NO STUDENTS YET");
+
+        return str.toString();
+    }
+
+
+    @Override
+    public boolean addLesson(Lesson lesson) throws CouldNotCreateException {
         if(!lesson.getName().equals(null))
         {
             this.classes.add(lesson);
@@ -30,8 +70,8 @@ public class University
         throw  new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
     }
 
-    public boolean deleteClass(int index)throws CouldNotDeleteException
-    {
+    @Override
+    public boolean deleteLesson(int index) throws CouldNotDeleteException {
         if(index < 0 || index >= this.classes.size())
             throw new CouldNotDeleteException(CouldNotDeleteException.NOT_DELETED_MSG);
 
@@ -39,8 +79,8 @@ public class University
         return true;
     }
 
-    public String listClasses()
-    {
+    @Override
+    public String listAllLessons() {
         StringBuilder str = new StringBuilder();
 
         if(this.classes.size()>0)
@@ -54,26 +94,39 @@ public class University
         return str.toString();
     }
 
-    public boolean addStudent(Student student) throws CouldNotCreateException
-    {
-        if(student != null)
+    @Override
+    public boolean addTeacher(Teacher teacher) throws CouldNotCreateException {
+        if(!teacher.getName().equals(null))
         {
-            this.students.add(student);
+            this.teachers.add(teacher);
             return true;
         }
-        throw new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
+        throw  new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
     }
 
-    public boolean deleteStudent(int index) throws CouldNotDeleteException
-    {
-        if(index < 0 || index >= this.students.size())
+    @Override
+    public boolean deleteTeacher(int index) throws CouldNotDeleteException {
+        if(index < 0 || index >= this.teachers.size())
             throw new CouldNotDeleteException(CouldNotDeleteException.NOT_DELETED_MSG);
 
-        this.students.remove(index);
+        this.teachers.remove(index);
         return true;
     }
 
+    @Override
+    public String listAllTeachers() {
+        StringBuilder str = new StringBuilder();
 
+        if(this.teachers.size()>0)
+        {
+            for(Teacher current : this.teachers)
+                str.append(current).append("\n");
+        }
+        else
+            str.append("THERE IS NO TEACHERS YET");
+
+        return str.toString();
+    }
 
     public List<Lesson> getClasses() {
         return classes;
@@ -98,4 +151,5 @@ public class University
     public void setTeachers(List<Teacher> teachers) {
         this.teachers = teachers;
     }
+
 }

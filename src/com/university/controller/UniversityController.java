@@ -61,4 +61,6 @@ public class UniversityController
     {
         return this.university.listAllStudents();
     }
+
+    public University getUniversity(){return this.university;}
 }

@@ -38,7 +38,7 @@ public class University implements ILesson, IStudent, ITeacher
     @Override
     public boolean deleteStudent(int index) throws CouldNotDeleteException
     {
-        if(index < 0 || index >= this.students.size())
+        if(this.students.size() <= 0 || index < 0 || index >= this.students.size())
             throw new CouldNotDeleteException(CouldNotDeleteException.NOT_DELETED_MSG);
 
         this.students.remove(index);
@@ -50,8 +50,8 @@ public class University implements ILesson, IStudent, ITeacher
         StringBuilder str = new StringBuilder();
 
         if(this.students.size()>0) {
-            for (Student current : this.students)
-                str.append(current).append("\n");
+            for (int i = 0; i < this.students.size(); i++)
+                str.append("\t<<"+(i+1)+">>").append("\n"+this.students.get(i)).append("\n");
         }
         else
             str.append("THERE IS NO STUDENTS YET");

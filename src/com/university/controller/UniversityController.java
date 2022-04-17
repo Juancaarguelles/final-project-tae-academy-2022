@@ -4,6 +4,7 @@ import com.university.exceptions.CouldNotCreateException;
 import com.university.model.Lesson;
 import com.university.model.Student;
 import com.university.model.University;
+import com.university.model.teacher.Teacher;
 
 public class UniversityController
 {
@@ -89,6 +90,38 @@ public class UniversityController
         {
             System.out.println(e.getMessage());
             RESPONSE_MSG = "Class could not be deleted";
+        }
+        return RESPONSE_MSG;
+    }
+
+    public String addTeacherToLesson(int lessonIndex, Teacher teacher)
+    {
+        RESPONSE_MSG = "";
+        Lesson lesson = this.university.getClasses().get(lessonIndex);
+        try
+        {
+            if (this.university.addTeacherToLesson(lessonIndex, teacher))
+                RESPONSE_MSG = "Teacher "+teacher.getName()+" was registered in "+lesson.getName();
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            RESPONSE_MSG = "Teacher "+teacher.getName()+" wasn't registered to "+lesson.getName();
+        }
+        return RESPONSE_MSG;
+    }
+
+    public String deleteTeacherFromLesson(int lessonIndex)
+    {
+        RESPONSE_MSG = "";
+        Lesson lesson = this.university.getClasses().get(lessonIndex);
+        try
+        {
+            if (this.university.deleteTeacherFromLesson(lessonIndex))
+                RESPONSE_MSG = "Teacher  was removed from "+lesson.getName();
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            RESPONSE_MSG = "Teacher wasn't removed from "+lesson.getName();
         }
         return RESPONSE_MSG;
     }

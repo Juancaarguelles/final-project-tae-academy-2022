@@ -3,6 +3,7 @@ package com.university;
 import com.university.controller.UniversityController;
 import com.university.model.Person;
 import com.university.model.Student;
+import com.university.ui.UILesson;
 import com.university.ui.UIStudent;
 
 import java.util.Scanner;
@@ -24,8 +25,10 @@ public class Main {
         {
             System.out.println("\nWELCOME TO THE UNIVERSITY");
             System.out.println("1. Show Students Menu" +
-                    "\n2. Exit");
+                    "\n2. Show Lessons Menu" +
+                    "\n3. Exit");
 
+            System.out.print("Type the option::");
             option = input.nextInt();
 
             switch (option)
@@ -34,6 +37,9 @@ public class Main {
                     UIStudent.showMenu();
                     break;
                 case 2:
+                    UILesson.showMenu();
+                    break;
+                case 3:
                     System.out.println("See you soon!");
                     break;
                 default:
@@ -41,6 +47,6 @@ public class Main {
                     break;
             }
 
-        }while (option != 2);
+        }while (option != 3);
     }
 }

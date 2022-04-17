@@ -7,6 +7,7 @@ import com.university.interfaces.IStudent;
 import com.university.model.teacher.Teacher;
 
 import javax.transaction.xa.XAException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lesson implements IStudent
@@ -20,6 +21,13 @@ public class Lesson implements IStudent
         this.name = name;
         this.classroom = classroom;
         this.teacher = teacher;
+        this.students = new ArrayList<>();
+    }
+
+    public Lesson(String name, String classroom) {
+        this.name = name;
+        this.classroom = classroom;
+        this.students = new ArrayList<>();
     }
 
     public String getName() {
@@ -52,6 +60,24 @@ public class Lesson implements IStudent
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public boolean addTeacher(Teacher teacher)throws CouldNotCreateException
+    {
+        if(this.teacher.getName().equals(null))
+            throw new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
+        this.teacher = teacher;
+        return true;
+    }
+
+    public boolean deleteTeacher()throws CouldNotDeleteException
+    {
+        if(this.teacher != null)
+        {
+            this.teacher = null;
+            return true;
+        }
+        throw new CouldNotDeleteException(CouldNotDeleteException.NOT_DELETED_MSG);
     }
 
     @Override
@@ -106,7 +132,7 @@ public class Lesson implements IStudent
         return "NAME : "+this.name+
                 "\nCLASSROOM : "+this.classroom+
                 "\nSTUDENTS : "+listAllStudents()+
-                "\nTEACHER : "+this.teacher+"\n";
+                "\nTEACHER : "+(this.teacher!= null ? this.teacher : "No Teacher Assigned")+"\n";
 
     }
 }

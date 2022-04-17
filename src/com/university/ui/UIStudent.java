@@ -43,7 +43,7 @@ public class UIStudent
         }while (option != 4);
     }
 
-    public static Student createStudent()
+    private static Student createStudent()
     {
         System.out.print("Type the name : ");
         String name = Main.input.next();
@@ -54,7 +54,7 @@ public class UIStudent
         return new Student(name, lastName , age);
     }
 
-    public static int selectStudent()
+    private static int selectStudent()
     {
         int option = 0;
         if(Main.universityController.getUniversity().getStudents().size()>0)
@@ -63,10 +63,10 @@ public class UIStudent
             System.out.print("Type the <<index>>::");
             option = Main.input.nextInt();
 
-            if(option < 1 || option >= Main.universityController.getUniversity().getStudents().size())
+            if(option < 1 || option > Main.universityController.getUniversity().getStudents().size())
                 System.out.println("Please select a valid index");
 
-        }while (option < 1 || option >= Main.universityController.getUniversity().getStudents().size());
+        }while (option < 1 || option >1 Main.universityController.getUniversity().getStudents().size());
 
         return --option;
     }

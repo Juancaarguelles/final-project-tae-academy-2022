@@ -80,6 +80,20 @@ public class University implements ILesson, IStudent, ITeacher
     }
 
     @Override
+    public boolean addTeacherToLesson(int lessonIndex, Teacher teacher) throws CouldNotCreateException {
+        if(this.classes.get(lessonIndex).addTeacher(teacher))
+            return true;
+        throw new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
+    }
+
+    @Override
+    public boolean deleteTeacherFromLesson(int lessonIndex) throws CouldNotDeleteException {
+        if(this.classes.get(lessonIndex).deleteTeacher())
+            return true;
+        throw new CouldNotDeleteException(CouldNotDeleteException.NOT_DELETED_MSG);
+    }
+
+    @Override
     public boolean addStudentToLesson(int lessonIndex, Student student)
     {
         try
@@ -115,8 +129,8 @@ public class University implements ILesson, IStudent, ITeacher
 
         if(this.classes.size()>0)
         {
-            for(Lesson current : this.classes)
-                str.append(current).append("\n");
+            for(int i = 0; i < this.classes.size(); i++)
+                str.append("\t<<"+(i+1)+">>").append("\n"+this.classes.get(i)).append("\n");
         }
         else
             str.append("THERE IS NO CLASSES YET");
@@ -133,6 +147,7 @@ public class University implements ILesson, IStudent, ITeacher
         }
         throw  new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
     }
+
 
     @Override
     public boolean deleteTeacher(int index) throws CouldNotDeleteException {

@@ -97,8 +97,11 @@ public class University implements ILesson, IStudent, ITeacher
     public boolean deleteStudentFromLesson(int lessonIndex, int studentIndex) {
         try
         {
-            this.classes.get(lessonIndex).deleteStudent(studentIndex);
-            return true;
+            if(lessonIndex > 1 || lessonIndex < this.getClasses().size()) {
+                this.classes.get(lessonIndex).deleteStudent(studentIndex);
+                return true;
+            }
+            return false;
         }catch (Exception e)
         {
             System.out.println(e.getMessage());

@@ -2,9 +2,11 @@ package com.university.model;
 
 import com.university.exceptions.CouldNotCreateException;
 import com.university.exceptions.CouldNotDeleteException;
+import com.university.exceptions.DuplicatedStudentException;
 import com.university.interfaces.IStudent;
 import com.university.model.teacher.Teacher;
 
+import javax.transaction.xa.XAException;
 import java.util.List;
 
 public class Lesson implements IStudent
@@ -55,12 +57,12 @@ public class Lesson implements IStudent
     @Override
     public boolean addStudent(Student student) throws CouldNotCreateException
     {
-        if(student != null)
+        if(!this.students.contains(student))
         {
             this.students.add(student);
             return true;
         }
-        throw new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
+        throw new CouldNotCreateException(DuplicatedStudentException.DUPLICATED_STUDENT_MSG);
     }
 
     @Override

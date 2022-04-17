@@ -80,6 +80,33 @@ public class University implements ILesson, IStudent, ITeacher
     }
 
     @Override
+    public boolean addStudentToLesson(int lessonIndex, Student student)
+    {
+        try
+        {
+            this.classes.get(lessonIndex).addStudent(student);
+            return true;
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteStudentFromLesson(int lessonIndex, int studentIndex) {
+        try
+        {
+            this.classes.get(lessonIndex).deleteStudent(studentIndex);
+            return true;
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
     public String listAllLessons() {
         StringBuilder str = new StringBuilder();
 

@@ -8,6 +8,8 @@ import com.university.model.teacher.Teacher;
 
 public class UniversityController
 {
+    private static final String PROBLEM_MSG = "Something has gone wrong, check that exist students and classes";
+
     private static UniversityController universityController;
     private static String RESPONSE_MSG;
     private University university;
@@ -113,48 +115,52 @@ public class UniversityController
     public String deleteTeacherFromLesson(int lessonIndex)
     {
         RESPONSE_MSG = "";
-        Lesson lesson = this.university.getClasses().get(lessonIndex);
         try
         {
-            if (this.university.deleteTeacherFromLesson(lessonIndex))
-                RESPONSE_MSG = "Teacher  was removed from "+lesson.getName();
+            if (this.university.deleteTeacherFromLesson(lessonIndex)) {
+                Lesson lesson = this.university.getClasses().get(lessonIndex);
+                RESPONSE_MSG = "Teacher  was removed from " + lesson.getName();
+            }
         }catch (Exception e)
         {
             System.out.println(e.getMessage());
-            RESPONSE_MSG = "Teacher wasn't removed from "+lesson.getName();
+            RESPONSE_MSG = "Teacher wasn't removed from the class";
         }
         return RESPONSE_MSG;
     }
 
-    public String addStudentToLesson(int lessonIndex, Student student)
+    public String addStudentToLesson(int lessonIndex, int studentIndex)
     {
-        Lesson lesson = this.university.getClasses().get(lessonIndex);
         RESPONSE_MSG = "";
 
         try {
-            if(this.university.addStudentToLesson(lessonIndex, student))
-                RESPONSE_MSG = "Student "+student.getName()+" was registered to "+lesson.getName();
+            if(this.university.addStudentToLesson(lessonIndex, studentIndex)) {
+                Lesson lesson = this.university.getClasses().get(lessonIndex);
+                Student student = this.university.getStudents().get(studentIndex);
+                RESPONSE_MSG = "Student " + student.getName() + " was registered to " + lesson.getName();
+            }
         }catch (Exception e)
         {
             System.out.println(e.getMessage());
-            RESPONSE_MSG = "Student "+student.getName()+" couldn't be added to "+lesson.getName();
+            RESPONSE_MSG = PROBLEM_MSG;
         }
         return RESPONSE_MSG;
     }
 
     public String deleteStudentFromLesson(int lessonIndex, int studentIndex)
     {
-        Student student = this.university.getStudents().get(studentIndex);
-        Lesson lesson = this.university.getClasses().get(lessonIndex);
         RESPONSE_MSG = "";
 
         try {
-            if(this.university.deleteStudentFromLesson(lessonIndex, studentIndex))
-                RESPONSE_MSG = "Student "+student.getName()+" was removed from "+lesson.getName();
+            if(this.university.deleteStudentFromLesson(lessonIndex, studentIndex)) {
+                Student student = this.university.getStudents().get(studentIndex);
+                Lesson lesson = this.university.getClasses().get(lessonIndex);
+                RESPONSE_MSG = "Student " + student.getName() + " was removed from " + lesson.getName();
+            }
         }catch (Exception e)
         {
             System.out.println(e.getMessage());
-            RESPONSE_MSG = "Student "+student.getName()+" couldn't be removed from "+lesson.getName();
+            RESPONSE_MSG = PROBLEM_MSG;
         }
         return RESPONSE_MSG;
     }
@@ -162,6 +168,11 @@ public class UniversityController
     public String listAllLessons()
     {
         return this.university.listAllLessons();
+    }
+
+    public String listAllStudentsFromLesson(int lessonIndex)
+    {
+        return this.university.listAllStudentsFromLesson(lessonIndex);
     }
 
     public University getUniversity(){return this.university;}

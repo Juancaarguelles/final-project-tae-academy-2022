@@ -15,10 +15,11 @@ public class UILesson
             System.out.println("1. Register Lesson" +
                     "\n2. Delete Lesson" +
                     "\n3. Add teacher to lesson" +
-                    "\n4. Add Student to lesson" +
-                    "\n5. Delete Student from lesson" +
-                    "\n6. Show all lessons" +
-                    "\n7. Go back to menu");
+                    "\n4. Delete teacher from lesson"+
+                    "\n5. Add Student to lesson" +
+                    "\n6. Delete Student from lesson" +
+                    "\n7. Show all lessons" +
+                    "\n8. Go back to menu");
             System.out.print("Type the option::");
             option = Main.input.nextInt();
 
@@ -35,11 +36,17 @@ public class UILesson
                 case 4:
                     break;
                 case 5:
+                    System.out.println(Main.universityController.addStudentToLesson(selectLesson(), UIStudent.selectStudent()));
                     break;
                 case 6:
-                    System.out.println(Main.universityController.listAllLessons());
+                    int lessonIndex = selectLesson();
+                    ;
+                    System.out.println(Main.universityController.deleteStudentFromLesson(lessonIndex, selectStudentFromLesson(lessonIndex)));
                     break;
                 case 7:
+                    System.out.println(Main.universityController.listAllLessons());
+                    break;
+                case 8:
                     System.out.println("Going back to Main menu");
                     break;
                 default:
@@ -47,7 +54,7 @@ public class UILesson
                     break;
             }
 
-        }while (option != 7);
+        }while (option != 8);
     }
 
     private static Lesson createLesson()
@@ -72,6 +79,23 @@ public class UILesson
                     System.out.println("Please select a valid index");
 
             }while (option < 1 || option > Main.universityController.getUniversity().getClasses().size());
+
+        return --option;
+    }
+
+    private static int selectStudentFromLesson(int lessonIndex)
+    {
+        int option = 0;
+        if(Main.universityController.getUniversity().getClasses().get(lessonIndex).getStudents().size()>0)
+            do {
+                System.out.println("\n"+Main.universityController.listAllStudentsFromLesson(lessonIndex));
+                System.out.print("Type the <<index>>::");
+                option = Main.input.nextInt();
+
+                if(option < 1 || option > Main.universityController.getUniversity().getClasses().get(lessonIndex).getStudents().size())
+                    System.out.println("Please select a valid index");
+
+            }while (option < 1 || option > Main.universityController.getUniversity().getClasses().get(lessonIndex).getStudents().size());
 
         return --option;
     }

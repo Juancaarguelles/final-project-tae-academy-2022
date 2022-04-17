@@ -106,8 +106,8 @@ public class Lesson implements IStudent
         StringBuilder str = new StringBuilder();
 
         if(this.students.size()>0) {
-            for (Student current : this.students)
-                str.append(current).append("\n");
+            for(int i = 0; i < this.students.size(); i++)
+                str.append("\t<<"+(i+1)+">>").append("\n"+this.students.get(i)).append("\n");
         }
         else
             str.append("THERE IS NO STUDENTS YET");
@@ -131,7 +131,7 @@ public class Lesson implements IStudent
     {
         return "NAME : "+this.name+
                 "\nCLASSROOM : "+this.classroom+
-                "\nSTUDENTS : "+listAllStudents()+
+                "\nSTUDENTS \n: "+listAllStudents()+
                 "\nTEACHER : "+(this.teacher!= null ? this.teacher : "No Teacher Assigned")+"\n";
 
     }

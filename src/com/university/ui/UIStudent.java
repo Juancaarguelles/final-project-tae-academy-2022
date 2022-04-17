@@ -54,7 +54,7 @@ public class UIStudent
         return new Student(name, lastName , age);
     }
 
-    private static int selectStudent()
+    public static int selectStudent()
     {
         int option = 0;
         if(Main.universityController.getUniversity().getStudents().size()>0)
@@ -66,8 +66,9 @@ public class UIStudent
             if(option < 1 || option > Main.universityController.getUniversity().getStudents().size())
                 System.out.println("Please select a valid index");
 
-        }while (option < 1 || option >1 Main.universityController.getUniversity().getStudents().size());
+        }while (option < 1 || option > Main.universityController.getUniversity().getStudents().size());
 
         return --option;
     }
+
 }

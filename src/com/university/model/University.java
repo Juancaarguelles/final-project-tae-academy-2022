@@ -90,38 +90,26 @@ public class University implements ILesson, IStudent, ITeacher
     public boolean deleteTeacherFromLesson(int lessonIndex) throws CouldNotDeleteException {
         if(this.classes.get(lessonIndex).deleteTeacher())
             return true;
-        throw new CouldNotDeleteException(CouldNotDeleteException.NOT_DELETED_MSG);
+        throw new CouldNotDeleteException(CouldNotDeleteException.SPECIFIED_PROBLEM_MSG);
     }
 
     @Override
-    public boolean addStudentToLesson(int lessonIndex, Student student)
+    public boolean addStudentToLesson(int lessonIndex, int studentIndex) throws CouldNotCreateException
     {
-        try
-        {
-            this.classes.get(lessonIndex).addStudent(student);
-            return true;
-        }catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            return false;
-        }
+        if((this.students.size() <= 0 || this.classes.size() <= 0))
+            throw new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
+
+        return this.classes.get(lessonIndex).addStudent(this.students.get(studentIndex));
     }
 
     @Override
-    public boolean deleteStudentFromLesson(int lessonIndex, int studentIndex) {
-        try
-        {
-            if(lessonIndex > 1 || lessonIndex < this.getClasses().size()) {
-                this.classes.get(lessonIndex).deleteStudent(studentIndex);
-                return true;
-            }
-            return false;
-        }catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            return false;
-        }
+    public boolean deleteStudentFromLesson(int lessonIndex, int studentIndex) throws CouldNotDeleteException
+    {
+        if (this.classes.get(lessonIndex).getStudents().size() <= 0 || studentIndex < 0)
+            throw new CouldNotDeleteException(CouldNotDeleteException.SPECIFIED_PROBLEM_MSG);
+        return this.classes.get(lessonIndex).deleteStudent(studentIndex);
     }
+
 
     @Override
     public String listAllLessons() {
@@ -131,6 +119,23 @@ public class University implements ILesson, IStudent, ITeacher
         {
             for(int i = 0; i < this.classes.size(); i++)
                 str.append("\t<<"+(i+1)+">>").append("\n"+this.classes.get(i)).append("\n");
+        }
+        else
+            str.append("THERE IS NO CLASSES YET");
+
+        return str.toString();
+    }
+
+    @Override
+    public String listAllStudentsFromLesson(int lessonIndex) {
+        StringBuilder str = new StringBuilder();
+
+        if(lessonIndex >= 0) {
+            Lesson lesson = this.classes.get(lessonIndex);
+            if (lesson.getStudents().size() > 0) {
+                for (int i = 0; i < lesson.getStudents().size(); i++)
+                    str.append("\t<<" + (i + 1) + ">>").append("\n" + lesson.getStudents().get(i)).append("\n");
+            }
         }
         else
             str.append("THERE IS NO CLASSES YET");

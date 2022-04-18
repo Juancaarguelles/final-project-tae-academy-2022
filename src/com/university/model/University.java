@@ -80,8 +80,8 @@ public class University implements ILesson, IStudent, ITeacher
     }
 
     @Override
-    public boolean addTeacherToLesson(int lessonIndex, Teacher teacher) throws CouldNotCreateException {
-        if(this.classes.get(lessonIndex).addTeacher(teacher))
+    public boolean addTeacherToLesson(int lessonIndex, int teacherIndex) throws CouldNotCreateException {
+        if(this.classes.get(lessonIndex).addTeacher(this.teachers.get(teacherIndex)))
             return true;
         throw new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
     }
@@ -169,8 +169,9 @@ public class University implements ILesson, IStudent, ITeacher
 
         if(this.teachers.size()>0)
         {
-            for(Teacher current : this.teachers)
-                str.append(current).append("\n");
+            for(int i = 0; i < this.getTeachers().size(); i++)
+                str.append("\t<<" + (i + 1) + ">>").append("\n" + this.teachers.get(i)).append("\n");
+
         }
         else
             str.append("THERE IS NO TEACHERS YET");

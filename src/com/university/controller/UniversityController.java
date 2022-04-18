@@ -96,18 +96,20 @@ public class UniversityController
         return RESPONSE_MSG;
     }
 
-    public String addTeacherToLesson(int lessonIndex, Teacher teacher)
+    public String addTeacherToLesson(int lessonIndex, int teacherIndex)
     {
         RESPONSE_MSG = "";
-        Lesson lesson = this.university.getClasses().get(lessonIndex);
+
         try
         {
-            if (this.university.addTeacherToLesson(lessonIndex, teacher))
+            Lesson lesson = this.university.getClasses().get(lessonIndex);
+            Teacher teacher = this.university.getTeachers().get(teacherIndex);
+            if (this.university.addTeacherToLesson(lessonIndex, teacherIndex))
                 RESPONSE_MSG = "Teacher "+teacher.getName()+" was registered in "+lesson.getName();
         }catch (Exception e)
         {
             System.out.println(e.getMessage());
-            RESPONSE_MSG = "Teacher "+teacher.getName()+" wasn't registered to "+lesson.getName();
+            RESPONSE_MSG = "Teacher wasn't registered to the lesson";
         }
         return RESPONSE_MSG;
     }
@@ -173,6 +175,40 @@ public class UniversityController
     public String listAllStudentsFromLesson(int lessonIndex)
     {
         return this.university.listAllStudentsFromLesson(lessonIndex);
+    }
+
+    public String addTeacher(Teacher teacher)
+    {
+        RESPONSE_MSG = "";
+        try
+        {
+            if(this.university.addTeacher(teacher))
+                RESPONSE_MSG = "Teacher "+teacher.getName()+" added succesfully";
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            RESPONSE_MSG = "Teacher "+teacher.getName()+" couldn't be added";
+        }
+        return RESPONSE_MSG;
+    }
+    public String deleteTeacher(int index)
+    {
+        RESPONSE_MSG = "";
+        try
+        {
+            if(this.university.deleteTeacher(index))
+                RESPONSE_MSG = "Teacher was removed succesfully";
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            RESPONSE_MSG = "Teacher couldn't be removed";
+        }
+        return RESPONSE_MSG;
+    }
+
+    public String listAllTeachers()
+    {
+        return this.university.listAllTeachers();
     }
 
     public University getUniversity(){return this.university;}

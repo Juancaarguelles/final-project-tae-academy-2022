@@ -5,8 +5,8 @@ public class PartTimeTeacher extends Teacher
     private static final float BASE_SALARY = 30f;
     private int activeHours;
 
-    public PartTimeTeacher(String name, String lastName, float salary, int activeHours) {
-        super(name, lastName, salary);
+    public PartTimeTeacher(String name, String lastName, int activeHours) {
+        super(name, lastName);
         this.activeHours = activeHours;
     }
 
@@ -19,14 +19,16 @@ public class PartTimeTeacher extends Teacher
     }
 
     @Override
-    public void calculateSalary() {
+    public float calculateSalary() {
         this.salary = BASE_SALARY * this.activeHours;
+        return this.salary;
     }
 
     @Override
     public String toString()
     {
         return super.toString()+
-                "ACTIVE HOURS : "+this.activeHours+"\n";
+                "ACTIVE HOURS : "+this.activeHours+"\n"+
+                "TYPE : Part Time Teacher\n";
     }
 }

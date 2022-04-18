@@ -4,8 +4,11 @@ import com.university.controller.UniversityController;
 import com.university.model.Lesson;
 import com.university.model.Person;
 import com.university.model.Student;
+import com.university.model.University;
+import com.university.model.teacher.FullTimeTeacher;
 import com.university.ui.UILesson;
 import com.university.ui.UIStudent;
+import com.university.ui.UITeacher;
 
 import java.util.Scanner;
 
@@ -28,7 +31,8 @@ public class Main {
             System.out.println("\nWELCOME TO THE UNIVERSITY");
             System.out.println("1. Show Students Menu" +
                     "\n2. Show Lessons Menu" +
-                    "\n3. Exit");
+                    "\n3. Show Teacher menu"+
+                    "\n4. Exit");
 
             System.out.print("Type the option::");
             option = input.nextInt();
@@ -42,14 +46,16 @@ public class Main {
                     UILesson.showMenu();
                     break;
                 case 3:
-                    System.out.println("See you soon!");
+                    UITeacher.showMenu();
                     break;
+                case 4:
+                    System.out.println("See you soon!");
                 default:
                     System.out.println("Select a valid option please");
                     break;
             }
 
-        }while (option != 3);
+        }while (option != 4);
     }
 
     private static void populateUniversity()
@@ -63,6 +69,9 @@ public class Main {
 
         universityController.addLesson(new Lesson("Code", "302B"));
         universityController.addLesson(new Lesson("Maths", "101A"));
+
+        universityController.addTeacher(new FullTimeTeacher("Ivan", "Leal", 4));
+
 
     }
 }

@@ -6,9 +6,8 @@ public abstract class Teacher extends Person
 {
     protected float salary;
 
-    public Teacher(String name, String lastName, float salary) {
+    public Teacher(String name, String lastName) {
         super(name, lastName);
-        this.salary = salary;
     }
 
     public float getSalary() {
@@ -19,12 +18,12 @@ public abstract class Teacher extends Person
         this.salary = salary;
     }
 
-    public abstract void calculateSalary();
+    public abstract float calculateSalary();
 
     @Override
     public String toString()
     {
         return super.toString()+
-                "SALARY : "+this.salary+"\n";
+                "SALARY : "+this.calculateSalary()+"$\n";
     }
 }

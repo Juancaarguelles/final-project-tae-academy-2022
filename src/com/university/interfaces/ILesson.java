@@ -10,7 +10,7 @@ public interface ILesson
 {
     boolean addLesson(Lesson lesson) throws CouldNotCreateException;
     boolean deleteLesson(int index) throws CouldNotDeleteException;
-    boolean addTeacherToLesson(int lessonIndex, Teacher teacher) throws CouldNotCreateException;
+    boolean addTeacherToLesson(int lessonIndex, int teacherIndex) throws CouldNotCreateException;
     boolean deleteTeacherFromLesson(int lessonIndex) throws CouldNotDeleteException;
     boolean addStudentToLesson(int lessonIndex, int studentIndex) throws CouldNotCreateException;
     boolean deleteStudentFromLesson(int lessonIndex, int studentIndex) throws CouldNotDeleteException;

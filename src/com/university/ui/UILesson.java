@@ -69,16 +69,17 @@ public class UILesson
     private static int selectLesson()
     {
         int option = 0;
-        if(Main.universityController.getUniversity().getClasses().size()>0)
+        if(Main.universityController.getUniversity().getClasses().size()>0) {
             do {
-                System.out.println("\n"+Main.universityController.listAllLessons());
+                System.out.println("\n" + Main.universityController.listAllLessons());
                 System.out.print("Type the <<index>>::");
                 option = Main.input.nextInt();
 
-                if(option < 1 || option > Main.universityController.getUniversity().getClasses().size())
+                if (option < 1 || option > Main.universityController.getUniversity().getClasses().size())
                     System.out.println("Please select a valid index");
 
-            }while (option < 1 || option > Main.universityController.getUniversity().getClasses().size());
+            } while (option < 1 || option > Main.universityController.getUniversity().getClasses().size());
+        }
 
         return --option;
     }

@@ -57,16 +57,17 @@ public class UIStudent
     public static int selectStudent()
     {
         int option = 0;
-        if(Main.universityController.getUniversity().getStudents().size()>0)
-        do {
-            System.out.println("\n"+Main.universityController.listAllStudents());
-            System.out.print("Type the <<index>>::");
-            option = Main.input.nextInt();
+        if(Main.universityController.getUniversity().getStudents().size()>0) {
+            do {
+                System.out.println("\n" + Main.universityController.listAllStudents());
+                System.out.print("Type the <<index>>::");
+                option = Main.input.nextInt();
 
-            if(option < 1 || option > Main.universityController.getUniversity().getStudents().size())
-                System.out.println("Please select a valid index");
+                if (option < 1 || option > Main.universityController.getUniversity().getStudents().size())
+                    System.out.println("Please select a valid index");
 
-        }while (option < 1 || option > Main.universityController.getUniversity().getStudents().size());
+            } while (option < 1 || option > Main.universityController.getUniversity().getStudents().size());
+        }
 
         return --option;
     }

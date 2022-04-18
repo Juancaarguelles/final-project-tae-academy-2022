@@ -6,10 +6,15 @@ import com.university.model.Person;
 import com.university.model.Student;
 import com.university.model.University;
 import com.university.model.teacher.FullTimeTeacher;
+import com.university.model.teacher.PartTimeTeacher;
+import com.university.model.teacher.Teacher;
 import com.university.ui.UILesson;
 import com.university.ui.UIStudent;
 import com.university.ui.UITeacher;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -60,18 +65,46 @@ public class Main {
 
     private static void populateUniversity()
     {
-        universityController.addStudent(new Student("Juan Camilo", "Argüelles Ardila", 21));
-        universityController.addStudent(new Student("Juan David", "Duarte Hernadez", 24));
-        universityController.addStudent(new Student("Sergio David", "Buitrago Mesa", 22));
-        universityController.addStudent(new Student("Juan Diego", "Castellanos Jerez", 21));
-        universityController.addStudent(new Student("Daniela Maria", "Fonseca Perez", 18));
-        universityController.addStudent(new Student("Elizabeth", "Sanchez Corredor", 23));
+        Student s1 = new Student("Juan Camilo", "Argüelles Ardila", 21);
+        Student s2 = new Student("Juan David", "Duarte Hernadez", 24);
+        Student s3 = new Student("Sergio David", "Buitrago Mesa", 22);
+        Student s4 = new Student("Juan Diego", "Castellanos Jerez", 21);
+        Student s5 = new Student("Daniela Maria", "Fonseca Perez", 18);
+        Student s6 = new Student("Elizabeth", "Sanchez Corredor", 23);
 
-        universityController.addLesson(new Lesson("Code", "302B"));
-        universityController.addLesson(new Lesson("Maths", "101A"));
+        Teacher t1 = new FullTimeTeacher("Ivan", "Leal", 4);
+        Teacher t2 = new FullTimeTeacher("Fernado", "Fonseca", 5);
+        Teacher t3 = new PartTimeTeacher("Luis", "Castellanos", 6);
+        Teacher t4 = new PartTimeTeacher("Genaro", "Vargas", 4);
 
-        universityController.addTeacher(new FullTimeTeacher("Ivan", "Leal", 4));
 
+        Lesson l1 = new Lesson("Code", "302B");
+        Lesson l2 = new Lesson("Maths", "101A");
+
+        try
+        {
+            l1.addTeacher(t1);
+            l1.addStudent(s1);
+            l1.addStudent(s2);
+            l1.addStudent(s3);
+
+            l2.addTeacher(t2);
+            l2.addStudent(s2);
+            l2.addStudent(s3);
+            l2.addStudent(s4);
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        List<Student> students = Arrays.asList(s1, s2, s3, s4, s5, s6);
+        students.forEach(universityController::addStudent);
+
+        List<Teacher>teachers = Arrays.asList(t1, t2, t3, t4);
+        teachers.forEach(universityController::addTeacher);
+
+        List<Lesson>lessons = Arrays.asList(l1, l2);
+        lessons.forEach(universityController::addLesson);
 
     }
 }

@@ -3,6 +3,7 @@ package com.university.ui;
 import com.university.Main;
 import com.university.model.Lesson;
 import com.university.model.Student;
+import com.university.model.University;
 
 public class UILesson
 {
@@ -32,15 +33,17 @@ public class UILesson
                     System.out.println(Main.universityController.deleteLesson(selectLesson()));
                     break;
                 case 3:
+                    System.out.println(
+                           Main.universityController.addTeacherToLesson(selectLesson(), UITeacher.selectTeacher()));
                     break;
                 case 4:
+                    System.out.println(Main.universityController.deleteTeacherFromLesson(selectLesson()));
                     break;
                 case 5:
                     System.out.println(Main.universityController.addStudentToLesson(selectLesson(), UIStudent.selectStudent()));
                     break;
                 case 6:
                     int lessonIndex = selectLesson();
-                    ;
                     System.out.println(Main.universityController.deleteStudentFromLesson(lessonIndex, selectStudentFromLesson(lessonIndex)));
                     break;
                 case 7:

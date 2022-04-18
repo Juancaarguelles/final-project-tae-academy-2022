@@ -51,6 +51,8 @@ public class UITeacher
                     "\n2 .Part time teacher\n");
             System.out.print("Type option::");
 
+            option = Main.input.nextInt();
+
             if(option < 1 || option > 2)
                 System.out.println("Type a valid option please");
 

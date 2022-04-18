@@ -126,7 +126,7 @@ public class UniversityController
         }catch (Exception e)
         {
             System.out.println(e.getMessage());
-            RESPONSE_MSG = "Teacher wasn't removed from the class";
+            RESPONSE_MSG = "Teacher does not exit in this subject";
         }
         return RESPONSE_MSG;
     }

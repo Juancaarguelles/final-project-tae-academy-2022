@@ -2,7 +2,7 @@ package com.university.model.teacher;
 
 public class PartTimeTeacher extends Teacher
 {
-    private static final float BASE_SALARY = 30f;
+    private static final float BASE_SALARY = 60f;
     private int activeHours;
 
     public PartTimeTeacher(String name, String lastName, int activeHours) {

@@ -27,6 +27,7 @@ public class Lesson implements IStudent
     public Lesson(String name, String classroom) {
         this.name = name;
         this.classroom = classroom;
+        this.teacher = null;
         this.students = new ArrayList<>();
     }
 
@@ -64,7 +65,7 @@ public class Lesson implements IStudent
 
     public boolean addTeacher(Teacher teacher)throws CouldNotCreateException
     {
-        if(this.teacher.getName().equals(null))
+        if(teacher == null)
             throw new CouldNotCreateException(CouldNotCreateException.NOT_CREATED_MSG);
         this.teacher = teacher;
         return true;
@@ -110,7 +111,7 @@ public class Lesson implements IStudent
                 str.append("\t<<"+(i+1)+">>").append("\n"+this.students.get(i)).append("\n");
         }
         else
-            str.append("THERE IS NO STUDENTS YET");
+            str.append("THERE IS NO STUDENTS YET\n");
 
         return str.toString();
     }
@@ -132,7 +133,7 @@ public class Lesson implements IStudent
         return "NAME : "+this.name+
                 "\nCLASSROOM : "+this.classroom+
                 "\nSTUDENTS \n: "+listAllStudents()+
-                "\nTEACHER : "+(this.teacher!= null ? this.teacher : "No Teacher Assigned")+"\n";
+                "TEACHER : \n"+(this.teacher!= null ? this.teacher : "No Teacher Assigned");
 
     }
 }
